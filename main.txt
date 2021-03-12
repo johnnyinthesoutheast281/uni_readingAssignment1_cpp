@@ -97,13 +97,252 @@ Ex: int a = 1;
  
  // Chapter 13: Introduction to strings //
  
+To use the string type, we need to add <string>, which is a standard library.
 
+    #include <string>
+   
+To concatenating strings, we can simply use the " + " operator:
+
+Ex: #include <iostream>
+    #include <string>
+    using namespace std;
+    
+    int main(){
+        string a = "Hi ";
+        string b = "there!";
+        string c = a + b;
+        cout << c << "\n";     //This line will print out "Hi there!"//
+        cout << a + b << "\n"; //This line is the same with the upper one//
+        return 0;
+    }
+
+To access the ith element of a string, we can use the [] operator like we use it with arrays or with a built-in function at() :
+
+Ex: string a = "There is a bug";
+    char b = a[2];
+    char c = a.at(2);
+    cout << b << "\n"; //This line prints out "e"//
+    cout << c << "\n"; //This line is the same//
+    
+To compare two strings, we can simply use the logical operators :
+
+Ex: string a1 = "In the end";
+    string a2 = "in the end";
+    if (a1 != a2){
+       cout << "Two different strings";
+    else{
+       cout << "Both are one";
+    }
+    //Prints out "Two different strings"//
+    
+Get the string input: 
+
+Ex: string s;
+    cin >>  s; //Type in "abcxyz"//
+    cout << s; //Prints out "abcxyz"//
+    
+We can use pointer points to the string using c_str() built-in function since string is an array: 
+
+Ex: string a = "asd";
+    cout << a.c_str() << "\n"; //Prints out "asd"//
+    cout << (void*) a.c_str(); //Prints out the address of string a//
+
+To copy a part of a string, we can use the built-in function substr():
+
+Ex: string a = "abc";
+    string b = a.substr(1,2); //copy from 2nd element until get enough 2 characters//
+    
+Find a substring using find() function:
+
+Ex: string s = "abcxyz";
+    string b = "xy";
+    string::size_type found = s.find(b);
+    
+    if (found != std::string::npos){  //// If find() cannot find the substring, it returns std::string::npos ////
+        cout << "Found at : " << found;
+    }
+    else{
+        cout << "Cant find";
+    }
+    //Prints out "Found at : 3"//
+    
 
     
     
     
+//Chapter 14: Automatic type reduction//
+
+We can use auto so the type can be automatically specified: 
+
+Ex: auto a = "a"; //character type//
+    auto b = 12.34; //double type//
+    auto c = 12; //integer type//
+    auto& d = c; //int& type//
     
     
     
     
     
+//Chapter 15: Exercises//
+
+1. Array definition:
+#include <iostream>
+
+using namespace std;
+
+int main(){
+    double arr[3] = {12.1, 12.45, 56.3, 1.1, 6.2}
+    arr[0] = 1.2;
+    arr[4] = 3.14;
+    cout << "First element: " << arr[0] <<"\n";
+    cout << "Last element: " << arr[4] <<"\n";
+    return 0;
+ } 
+ 
+ Output: First element: 1.2
+         Last element: 3.14
+ 
+ 2. Pointer to an object
+ #include <iostream>
+ 
+ using namespace std;
+ 
+ int main(){
+     double num = 1.9;
+     double* ptr = &num;
+     cout << "The value of the pointed-to object is: " << *ptr;
+     return 0;
+ }
+ 
+ Output: The value of the pointed-to object is: 1.9
+ 
+ 3. Reference type
+ 
+ #include <iostream>
+ 
+ using namespace std;
+ 
+ int main(){
+     double mydouble = 1.5;
+     double& myreference = mydouble;
+     myreference = 2.5;
+     cout <<"Mydouble : " << mydouble << "and myreference: " << myreference << "\n";
+     mydouble = 3.6;
+     cout <<"Mydouble : " << mydouble << "and myreference: " << myreference << "\n";
+     return 0;
+ }
+ 
+ Output: Mydouble : 2.5 and myreference: 2.5
+         Mydouble : 3.6 and myreference: 3.6
+         
+ 4. Strings
+ 
+ #include <iostream>
+ #include <string>
+ using namespace std;
+ 
+ int main(){
+     string a = "abc";
+     string b = " xyz";
+     string c = a + b;
+     cout << c;
+     return 0;
+ }
+ 
+ Output: abc xyz
+ 
+ 5. Strings from standard input
+ 
+ #include <iostream>
+ #include <string>
+ using namespace std;
+ 
+ int main(){
+     string name;
+     cout << "Enter your name: \n";
+     getline(std::cin, name);
+     cout << "Your name: "<< name << "\n";
+     return 0;
+ }
+ 
+ Input: Tri
+ Output: Your name: Tri
+ 
+ 6. Creating a substring
+ 
+ #include <iostream>
+ #include <string>
+ using namespace std;
+ 
+ int main(){
+     string fullname = "John Doe";
+     string lastname = fullname.substr(5, 3);
+     string firstname = fullname.substr(0, 4);
+     cout << "The full name is " << fullname << "\n" << "The last name is " << lastname << "\n" << "The first name is " << firstname;
+     return 0;
+ }
+ 
+ Output: The first name is John Doe
+         The last name is Doe
+         The first name is John
+         
+ 7. Finding a single character
+ 
+ #include <iostream>
+ #include <string>
+ using namespace std;
+ 
+ int main(){
+     string s = "Hello C++ World.";
+     char c = "C";
+     auto characterfound = s.find(c);
+     
+     if (characterfound != std::string::npos){
+        cout << "Character found at: " << characterfound;
+     else{
+        cout << "Not found.";
+     }
+     return 0;
+ }
+ 
+ Output: Character found at: 6
+ 
+ 8. Finding a substring
+ 
+ #include <iostream>
+ #include <string>
+ using namespace std;
+ 
+ int main(){
+     string s = "Hello C++ World.";
+     string su = "C++";
+     auto substringfound = s.find(su);
+     
+     if (substringfound != std::string::npos){
+        cout << "Substring found at: " << substringfound;
+     else{
+        cout << "Not found.";
+     }
+     return 0;
+ }
+     
+ Output: Substring found at: 6
+     
+ 9. Automatic type deduction
+ 
+ #include <iostream>
+ 
+ using namespace std;
+ 
+ int main(){
+     auto a = 1;
+     auto b = 2.3;
+     auto c = "x";
+     cout << "Integer: " << a << "\nDouble: " << b << "\nCharacter: " << c;
+     return 0;
+ }
+ 
+ Output: Integer: 1
+         Double: 2.3
+         Character: x
+         
