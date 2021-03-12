@@ -345,4 +345,3 @@ int main(){
  Output: Integer: 1
          Double: 2.3
          Character: x
-         
